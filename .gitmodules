@@ -1,0 +1,3 @@
+[submodule "src/lib/assets/icon"]
+	path = src/lib/assets/icon
+	url = https://github.com/winpax/org-icon.git
