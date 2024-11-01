@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<enhanced:img src="$lib/assets/icon/icon.png" alt="Winpax Icon" width="100" height="100" />
+<h1>Welcome to Winpax</h1>
+
+<style lang="scss">
+	h1 {
+		font-size: 2.5em;
+	}
+</style>
