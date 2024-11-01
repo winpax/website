@@ -9,8 +9,6 @@
 
 <style lang="scss">
 	main {
-		background-color: #171717;
-		color: #f3f3f3;
 		padding: 1rem;
 		margin: none;
 		width: 100%;
