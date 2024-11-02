@@ -1,7 +1,9 @@
-<h1>
-	<enhanced:img src="$lib/assets/icon/icon.png" alt="Winpax Icon" width="100" height="100" />
-	Welcome to Winpax
-</h1>
+<main>
+	<h1>
+		<enhanced:img src="$lib/assets/icon/icon.png" alt="Winpax Icon" width="100" height="100" />
+		Welcome to Winpax
+	</h1>
+</main>
 
 <style lang="scss">
 	h1 {
@@ -13,12 +15,5 @@
 		gap: 1rem;
 
 		margin-top: 3rem;
-	}
-
-	img {
-		border-radius: 100%;
-		border: 1px #3f3f3f solid;
-		background-color: #3f3f3f;
-		padding: 0.5rem;
 	}
 </style>
