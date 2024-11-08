@@ -8,7 +8,12 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			transitionProperty: {
+				button:
+					'color, background-color, border-color, text-decoration-color, fill, stroke, transform'
+			}
+		}
 	},
 
 	plugins: [typography, forms, containerQueries, aspectRatio]
