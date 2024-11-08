@@ -4,10 +4,11 @@
 </script>
 
 <main class="column">
-	<h1 class="column mb-4 mt-12 gap-4 text-[2.5rem]">
+	<div class="column mb-4 mt-12 gap-4">
 		<enhanced:img src="$lib/assets/icon/icon.png" alt="Winpax Icon" width="150" height="150" />
-		Welcome to Winpax
-	</h1>
+		<h1 class="text-[2.5rem]">Welcome to Winpax</h1>
+	</div>
+
 	<desc>Creating blazing fast, package management solutions for the Windows platform.</desc>
 
 	<Project
