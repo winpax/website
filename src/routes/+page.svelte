@@ -3,8 +3,8 @@
 	import sfsuIcon from '$lib/assets/sfsu-logo.png';
 </script>
 
-<main class="flex flex-col items-center justify-center">
-	<h1 class="mb-4 mt-12 flex flex-col items-center gap-4 text-[2.5rem]">
+<main class="column">
+	<h1 class="column mb-4 mt-12 gap-4 text-[2.5rem]">
 		<enhanced:img src="$lib/assets/icon/icon.png" alt="Winpax Icon" width="150" height="150" />
 		Welcome to Winpax
 	</h1>
