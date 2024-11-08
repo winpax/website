@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Project from '../components/Project.svelte';
-	import sfsuIcon from '$lib/assets/sfsu-logo.png';
+	import Project from '$lib/components/Project.svelte';
+
+	import { projects } from '$lib/projects';
 </script>
 
 <main class="column">
@@ -11,13 +12,7 @@
 
 	<desc>Creating blazing fast, package management solutions for the Windows platform.</desc>
 
-	<Project
-		title="SFSU"
-		description="Super fast replacements and additions to Scoop commands written in Rust"
-		link={{
-			label: 'SFSU Website',
-			href: 'https://www.cordor.dev/projects/sfsu',
-			image: sfsuIcon
-		}}
-	/>
+	{#each projects as project, index}
+		<Project {...project} alternate={index % 2 === 1} />
+	{/each}
 </main>

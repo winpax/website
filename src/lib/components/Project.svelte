@@ -1,5 +1,5 @@
-<script lang="ts">
-	interface Props {
+<script lang="ts" module>
+	export interface Props {
 		title: string;
 		description: string;
 		link: Link;
@@ -11,7 +11,9 @@
 		href: string;
 		image: string;
 	}
+</script>
 
+<script lang="ts">
 	const { title, description, link, alternate = false }: Props = $props();
 </script>
 
