@@ -17,8 +17,8 @@
 <div
 	class="mx-20 mt-12 flex min-w-[calc(100vw-10rem)] justify-between rounded-xl bg-[rgb(220,220,220)] p-4 shadow-lg"
 >
-	<div class="item-text">
-		<h1>{title}</h1>
+	<div class="flex min-h-full flex-col items-center justify-center text-center">
+		<h1 class="text-4xl font-extrabold">{title}</h1>
 		<p>{description}</p>
 	</div>
 
@@ -32,13 +32,3 @@
 		<img src={link.image} alt={link.label} />
 	</a>
 </div>
-
-<style lang="scss">
-	.item-text {
-		min-height: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-</style>
