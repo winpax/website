@@ -6,7 +6,7 @@
 
 <main class="column">
 	<div class="column mb-4 mt-12 gap-4">
-		<enhanced:img src="$lib/assets/icon/icon.png" alt="Winpax Icon" width="150" height="150" />
+		<img src="icons/org.png" alt="Winpax Icon" width="150" height="150" />
 		<h1 class="text-[2.5rem]">Welcome to Winpax</h1>
 	</div>
 
