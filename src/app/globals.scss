@@ -26,24 +26,6 @@
 // 	}
 // }
 
-html,
-body {
-	height: 100%;
-	width: 100%;
-}
-
-body {
-	color: var(--foreground);
-	background: var(--background);
-
-	font-family: 'Roboto', sans-serif;
-	font-size: 1.6rem;
-
-	box-sizing: border-box;
-
-	padding-bottom: 5rem;
-}
-
 @layer components {
 	.column {
 		@apply flex flex-col items-center justify-center;
