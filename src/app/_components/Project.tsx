@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 
 export interface Props {
 	title: string;
@@ -10,7 +10,7 @@ export interface Props {
 interface Link {
 	label: string;
 	href: string;
-	image: string;
+	image: StaticImageData | string;
 }
 
 function Header({ title, description }: Props) {

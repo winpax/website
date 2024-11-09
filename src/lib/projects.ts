@@ -1,7 +1,7 @@
-import sfsuIcon from '$lib/assets/sfsu-logo.png';
-import type { Props } from './components/Project.svelte';
+import sfsuIcon from '$/lib/assets/sfsu-logo.png';
+import Project from '$/app/_components/Project';
 
-export const projects: Props[] = [
+export const projects: React.ComponentProps<typeof Project>[] = [
 	{
 		title: 'SFSU',
 		description: 'Super fast replacements and additions to Scoop commands written in Rust',
