@@ -23,9 +23,13 @@ function Header({ title, description }: Props) {
 }
 
 function HeroImage({ link }: Props) {
-	return (
-		<Image className="max-w-[50vw]" src={link.image} alt={link.label} width={128} height={128} />
-	);
+	if (typeof link.image === 'string') {
+		return (
+			<Image className="max-w-[50vw]" src={link.image} alt={link.label} width={1200} height={630} />
+		);
+	}
+
+	return <Image className="max-w-[50vw]" src={link.image} alt={link.label} />;
 }
 
 export default function Project(props: Props) {
