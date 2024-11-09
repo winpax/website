@@ -7,7 +7,8 @@ on:
     branches:
       - trunk
 jobs:
-  Deploy-Production:
+  production:
+    name: Production Deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

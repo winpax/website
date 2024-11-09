@@ -7,7 +7,8 @@ on:
     branches-ignore:
       - trunk
 jobs:
-  Deploy-Preview:
+  preview:
+    name: Preview Deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
