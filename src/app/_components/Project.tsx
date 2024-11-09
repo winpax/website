@@ -29,7 +29,7 @@ function HeroImage({ link }: Props) {
 		);
 	}
 
-	return <Image className="max-w-[50vw]" src={link.image} alt={link.label} />;
+	return <Image {...link.image} className="max-w-[50vw]" alt={link.label} />;
 }
 
 export default function Project(props: Props) {
