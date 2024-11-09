@@ -1,22 +1,27 @@
 import { fetchIconUrl } from '$/lib/icons/org';
 
-export async function GET (): Promise<Response> {
+export async function GET(): Promise<Response> {
 	try {
 		const iconUrl = await fetchIconUrl();
 
-        if (!iconUrl) {
-            return Response.json({
-                error: 'No icon found'
-            },
-                {
-                    status: 404
-                }
-
-            );
+		if (!iconUrl) {
+			return Response.json(
+				{
+					error: 'No icon found'
+				},
+				{
+					status: 404
+				}
+			);
 		}
 
 		try {
-			const imageRes = await fetch(iconUrl);
+			const imageRes = await fetch(iconUrl, {
+				next: {
+					// Revalidate every 24 hours
+					revalidate: 60 * 60 * 60 * 24
+				}
+			});
 
 			if (!imageRes.ok) {
 				return imageRes;
@@ -65,4 +70,4 @@ export async function GET (): Promise<Response> {
 			}
 		);
 	}
-};
+}
