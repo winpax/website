@@ -1,4 +1,5 @@
-import Image, { type StaticImageData } from 'next/image';
+import { useMemo } from 'react';
+import Image, { type ImageProps, type StaticImageData } from 'next/image';
 
 export interface Props {
 	title: string;
@@ -23,13 +24,20 @@ function Header({ title, description }: Props) {
 }
 
 function HeroImage({ link }: Props) {
-	if (typeof link.image === 'string') {
-		return (
-			<Image className="max-w-[50vw]" src={link.image} alt={link.label} width={1200} height={630} />
-		);
+	const commonProps: ImageProps = useMemo(
+		() => ({
+			src: link.image,
+			alt: link.label,
+			className: 'max-w-[50vw]'
+		}),
+		[link]
+	);
+
+	if (typeof commonProps.src === 'string') {
+		return <Image {...commonProps} width={1200} height={630} />;
 	}
 
-	return <Image className="max-w-[50vw]" placeholder="blur" src={link.image} alt={link.label} />;
+	return <Image {...commonProps} placeholder="blur" />;
 }
 
 export default function Project(props: Props) {
