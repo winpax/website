@@ -29,16 +29,7 @@ function HeroImage({ link }: Props) {
 		);
 	}
 
-	return (
-		<Image
-			placeholder="blur"
-			src={link.image.src}
-			alt={link.label}
-			width={link.image.width}
-			height={link.image.height}
-			blurDataURL={link.image.blurDataURL}
-		/>
-	);
+	return <Image placeholder="blur" src={link.image} alt={link.label} width={1200} height={630} />;
 }
 
 export default function Project(props: Props) {
