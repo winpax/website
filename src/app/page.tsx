@@ -104,7 +104,7 @@ export default function Home() {
 	return (
 		<main className="column">
 			<div className="column mb-4 mt-12 gap-4">
-				<Image src="/icons/org.png" alt="Winpax Icon" width="150" height="150" />
+				<Image src="/icons/org.png" alt="Winpax Icon" width="150" height="150" priority />
 				<h1 className="text-[2.5rem]">Welcome to Winpax</h1>
 			</div>
 
