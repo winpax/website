@@ -29,7 +29,7 @@ function HeroImage({ link }: Props) {
 		);
 	}
 
-	return <Image placeholder="blur" src={link.image} alt={link.label} width={1200} height={630} />;
+	return <Image className="max-w-[50vw]" placeholder="blur" src={link.image} alt={link.label} />;
 }
 
 export default function Project(props: Props) {
