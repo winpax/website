@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import Image, { type ImageProps, type StaticImageData } from 'next/image';
+import Link from 'next/link';
 
 export interface Props {
 	title: string;
@@ -44,15 +45,13 @@ export default function Project(props: Props) {
 	const { link } = props;
 
 	return (
-		<a
+		<Link
 			className="card bg-base-100 m-5 min-w-[50vw] max-w-[50vw] shadow-xl transition-transform hover:scale-[1.02]"
 			href={link.href}
-			target="_blank"
-			rel="noopener noreferrer"
 			aria-label={link.label}
 		>
 			<HeroImage {...props} />
 			<Header {...props} />
-		</a>
+		</Link>
 	);
 }
