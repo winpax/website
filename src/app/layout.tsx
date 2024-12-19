@@ -23,7 +23,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className="h-full w-full">
+		<html lang="en" className="h-full w-full" data-theme="cupcake">
 			<body
 				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full bg-background pb-12 text-lg text-foreground antialiased`}
 			>
