@@ -14,8 +14,8 @@
 		"@next/mdx": "^15.1.1",
 		"@types/mdx": "^2.0.13",
 		"next": "15.0.3",
-		"react": "19.0.0-rc-66855b96-20241106",
-		"react-dom": "19.0.0-rc-66855b96-20241106"
+		"react": "19.0.0",
+		"react-dom": "19.0.0"
 	},
 	"devDependencies": {
 		"@tailwindcss/aspect-ratio": "^0.4.2",
