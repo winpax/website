@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import daisyui from 'daisyui';
+import daisyui, { type Config as DaisyConfig } from 'daisyui';
 import typography from '@tailwindcss/typography';
 
 export default {
@@ -20,5 +20,9 @@ export default {
 			}
 		}
 	},
-	plugins: [typography, daisyui]
+	plugins: [typography, daisyui],
+
+	daisyui: {
+		themes: ['cupcake']
+	} satisfies DaisyConfig
 } satisfies Config;

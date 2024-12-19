@@ -25,7 +25,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="h-full w-full" data-theme="cupcake">
 			<body
-				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full bg-background pb-12 text-lg text-foreground antialiased`}
+				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full pb-12 text-lg antialiased`}
 			>
 				{children}
 			</body>
