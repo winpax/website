@@ -1,13 +1,11 @@
-import { json, type RequestHandler } from '@sveltejs/kit';
+import { fetchIconUrl } from '$/lib/icons/org';
 
-import { fetchIconUrl } from '$lib/icons/org.server';
-
-export const GET: RequestHandler = async function () {
+export async function GET(): Promise<Response> {
 	try {
 		const iconUrl = await fetchIconUrl();
 
 		if (!iconUrl) {
-			return json(
+			return Response.json(
 				{
 					error: 'No icon found'
 				},
@@ -18,7 +16,12 @@ export const GET: RequestHandler = async function () {
 		}
 
 		try {
-			const imageRes = await fetch(iconUrl);
+			const imageRes = await fetch(iconUrl, {
+				next: {
+					// Revalidate every 24 hours
+					revalidate: 60 * 60 * 60 * 24
+				}
+			});
 
 			if (!imageRes.ok) {
 				return imageRes;
@@ -44,7 +47,7 @@ export const GET: RequestHandler = async function () {
 
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (_e) {
-			return json(
+			return Response.json(
 				{
 					error: 'Failed to fetch icon'
 				},
@@ -54,11 +57,11 @@ export const GET: RequestHandler = async function () {
 			);
 		}
 
-		return json({
+		return Response.json({
 			iconUrl
 		});
 	} catch (error: unknown) {
-		return json(
+		return Response.json(
 			{
 				error: error
 			},
@@ -67,4 +70,4 @@ export const GET: RequestHandler = async function () {
 			}
 		);
 	}
-};
+}
