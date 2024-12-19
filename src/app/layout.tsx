@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto, Roboto_Mono } from 'next/font/google';
+import { Back } from './_components/Back';
 import './globals.scss';
 
 const roboto = Roboto({
@@ -27,6 +28,7 @@ export default function RootLayout({
 			<body
 				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full pb-12 text-lg antialiased`}
 			>
+				<Back />
 				{children}
 			</body>
 		</html>
