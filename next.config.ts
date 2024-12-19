@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import createMdx from '@next/mdx';
 
 const nextConfig: NextConfig = {
 	images: {
@@ -11,4 +12,8 @@ const nextConfig: NextConfig = {
 	}
 };
 
-export default nextConfig;
+const withMdx = createMdx({
+	extension: /\.mdx?$/
+});
+
+export default withMdx(nextConfig);
