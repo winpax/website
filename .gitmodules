@@ -1,0 +1,4 @@
+[submodule "public/projects/sprinkles/docs"]
+	path = public/projects/sprinkles/docs
+	url = https://github.com/winpax/sprinkles.git
+	branch = gh-pages
