@@ -1,8 +1,9 @@
 import { favicons, type FaviconOptions } from 'favicons';
 import { join } from 'path';
-import { mkdir, readdir } from 'fs/promises';
 import ProgressBar from 'progress';
 import { title, description } from '$/lib/winpax';
+
+const srcDir = join(__dirname, '../src');
 
 const source = join(__dirname, '../public/icon.png');
 
@@ -58,14 +59,7 @@ const configuration: FaviconOptions = {
 try {
 	const response = await favicons(source, configuration);
 
-	const destDir = join(__dirname, '../icons');
-	const dirExists = await readdir(destDir)
-		.then(() => true)
-		.catch(() => false);
-
-	if (!dirExists) {
-		await mkdir(destDir);
-	}
+	const destDir = join(srcDir, 'lib', 'icons');
 
 	const imagesProgress = new ProgressBar('Writing images [:bar] :percent :etas', {
 		complete: '=',
@@ -76,19 +70,12 @@ try {
 
 	await Promise.all(
 		response.images.map(async ({ name, contents }) => {
-			const file = Bun.file(join(destDir, 'images', name));
+			const file = Bun.file(join(destDir, '../public', name));
 
 			await Bun.write(file, contents);
 			imagesProgress.tick();
 		})
 	);
-
-	const filesProgress = new ProgressBar('Writing files [:bar] :percent :etas', {
-		complete: '=',
-		incomplete: ' ',
-		width: 20,
-		total: response.files.length
-	});
 
 	const compiledHTML = response.html.join('\n').replaceAll('>', '/>');
 	const compiledJSX = `export function Icons() {
@@ -99,14 +86,20 @@ try {
         );
     }`;
 
-	response.files.push({
-		name: 'icons.tsx',
-		contents: compiledJSX
+	const file = Bun.file(join(destDir, 'icons.tsx'));
+
+	await Bun.write(file, compiledJSX);
+
+	const filesProgress = new ProgressBar('Writing files [:bar] :percent :etas', {
+		complete: '=',
+		incomplete: ' ',
+		width: 20,
+		total: response.files.length
 	});
 
 	await Promise.all(
 		response.files.map(async ({ name, contents }) => {
-			const file = Bun.file(join(destDir, name));
+			const file = Bun.file(join(__dirname, '../public', name));
 
 			await Bun.write(file, contents);
 			filesProgress.tick();

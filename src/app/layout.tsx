@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto, Roboto_Mono } from 'next/font/google';
 import { Back } from './_components/Back';
+import { Icons } from '../../icons/icons';
 import './globals.scss';
 
 const roboto = Roboto({
