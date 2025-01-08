@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { Themes } from '$/lib/themes';
+import { darkTheme, lightTheme } from '$/lib/themes';
 import { setTheme as setThemeAction } from '$/app/actions';
 
 export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
@@ -9,7 +9,7 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 
 	const updateTheme = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) => {
-			const newTheme = event.target.checked ? Themes.Dark : Themes.Light;
+			const newTheme = event.target.checked ? darkTheme : lightTheme;
 
 			setTheme(newTheme);
 			setThemeAction(newTheme);
@@ -25,11 +25,13 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 		<label className="swap swap-rotate absolute right-5 top-5">
 			{/* this hidden checkbox controls the state */}
 			<input
+				data-toggle-theme="dark,light"
+				data-act-class="ACTIVECLASS"
 				type="checkbox"
 				className="theme-controller"
-				value={Themes.Dark}
+				value={darkTheme}
 				onChange={updateTheme}
-				checked={theme === Themes.Dark}
+				checked={theme === darkTheme}
 			/>
 
 			{/* sun icon */}

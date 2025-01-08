@@ -27,10 +27,10 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const cookieStore = await cookies();
-	const theme = cookieStore.get('theme')?.value ?? 'cupcake';
+	const theme = cookieStore.get('theme')?.value ?? 'valentine';
 
 	return (
-		<html lang="en" className="h-full w-full" data-theme="cupcake">
+		<html lang="en" className="h-full w-full">
 			<head>
 				<Icons />
 			</head>

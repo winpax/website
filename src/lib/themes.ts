@@ -1,8 +1,6 @@
 import type { Config } from 'daisyui';
 
-export const themes: Config['themes'] = ['cupcake', 'synthwave', 'coffee', 'luxury', 'forest'];
+export const lightTheme = 'valentine';
+export const darkTheme = 'forest';
 
-export enum Themes {
-	Light = 'cupcake',
-	Dark = 'luxury'
-}
+export const themes: Config['themes'] = [lightTheme, darkTheme];
