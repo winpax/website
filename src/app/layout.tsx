@@ -4,6 +4,7 @@ import { Back } from './_components/Back';
 import { Icons } from '$/lib/icons/icons';
 import './globals.scss';
 import { ThemeController } from './_components/ThemeController';
+import { cookies } from 'next/headers';
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -20,11 +21,14 @@ export const metadata: Metadata = {
 	description: 'Creating blazing fast, package management solutions for the Windows platform.'
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const cookieStore = await cookies();
+	const theme = cookieStore.get('theme')?.value ?? 'cupcake';
+
 	return (
 		<html lang="en" className="h-full w-full" data-theme="cupcake">
 			<head>
@@ -34,7 +38,7 @@ export default function RootLayout({
 				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full pb-12 text-lg antialiased`}
 			>
 				<Back />
-				<ThemeController defaultTheme="retro" />
+				<ThemeController defaultTheme={theme} />
 				{children}
 			</body>
 		</html>

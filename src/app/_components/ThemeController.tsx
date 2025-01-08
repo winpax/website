@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { themes } from '$/lib/themes';
+import { setTheme as setThemeAction } from '$/app/actions';
 
 export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 	const [theme, setTheme] = useState(defaultTheme);
@@ -10,6 +11,7 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 		(event: ChangeEvent<HTMLInputElement>) => {
 			if (event.target.checked) {
 				setTheme(event.target.value);
+				setThemeAction(event.target.value);
 			}
 		},
 		[setTheme]
