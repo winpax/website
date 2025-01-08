@@ -1,6 +1,7 @@
 import { favicons, type FaviconOptions } from 'favicons';
 import { join } from 'path';
 import { mkdir, readdir } from 'fs/promises';
+import ProgressBar from 'progress';
 import { title, description } from '$/lib/winpax';
 
 const source = join(__dirname, '../public/icon.png');
@@ -66,21 +67,51 @@ try {
 		await mkdir(destDir);
 	}
 
+	const imagesProgress = new ProgressBar('Writing images [:bar] :percent :etas', {
+		complete: '=',
+		incomplete: ' ',
+		width: 20,
+		total: response.images.length
+	});
+
 	await Promise.all(
 		response.images.map(async ({ name, contents }) => {
-			const file = Bun.file(join(destDir, name));
+			const file = Bun.file(join(destDir, 'images', name));
 
 			await Bun.write(file, contents);
+			imagesProgress.tick();
 		})
 	);
 
-	response.files.map(async ({ name, contents }) => {
-		const file = Bun.file(join(destDir, name));
-
-		await Bun.write(file, contents);
+	const filesProgress = new ProgressBar('Writing files [:bar] :percent :etas', {
+		complete: '=',
+		incomplete: ' ',
+		width: 20,
+		total: response.files.length
 	});
 
-	console.log(response.html); // Array of strings (html elements)
+	const compiledHTML = response.html.join('\n').replaceAll('>', '/>');
+	const compiledJSX = `export function Icons() {
+        return (
+            <>
+                ${compiledHTML}
+            </>
+        );
+    }`;
+
+	response.files.push({
+		name: 'icons.tsx',
+		contents: compiledJSX
+	});
+
+	await Promise.all(
+		response.files.map(async ({ name, contents }) => {
+			const file = Bun.file(join(destDir, name));
+
+			await Bun.write(file, contents);
+			filesProgress.tick();
+		})
+	);
 } catch (error: unknown) {
 	console.log(error);
 }
