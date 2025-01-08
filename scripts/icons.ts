@@ -70,7 +70,7 @@ try {
 
 	await Promise.all(
 		response.images.map(async ({ name, contents }) => {
-			const file = Bun.file(join(destDir, '../public', name));
+			const file = Bun.file(join(__dirname, '../public', name));
 
 			await Bun.write(file, contents);
 			imagesProgress.tick();
