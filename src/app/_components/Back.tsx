@@ -12,7 +12,7 @@ export function Back() {
 		<AnimatePresence>
 			{pathname !== '/' && (
 				<motion.button
-					className="btn btn-ghost btn-lg btn-circle fixed left-5 top-5"
+					className="btn btn-circle btn-ghost btn-lg fixed left-5 top-5"
 					title="Go back"
 					onClick={() => {
 						router.back();

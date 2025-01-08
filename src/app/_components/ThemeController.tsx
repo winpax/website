@@ -22,7 +22,7 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 	}, [theme]);
 
 	return (
-		<div className="dropdown absolute right-5 top-5 mb-72">
+		<div className="dropdown absolute left-5 top-5 mb-72">
 			<div tabIndex={0} role="button" className="btn m-1">
 				Theme
 				<svg
