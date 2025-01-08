@@ -2,11 +2,17 @@
 
 import { AnimatePresence, motion } from 'motion/react';
 import { useRouter, usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
+import { themeChange } from 'theme-change';
 
 export function Back() {
 	const router = useRouter();
 	const pathname = usePathname();
+
+	useEffect(() => {
+		themeChange(false);
+	}, []);
 
 	return (
 		<AnimatePresence>

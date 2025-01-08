@@ -26,11 +26,11 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	// const cookieStore = await cookies();
-	// const theme = cookieStore.get('theme')?.value ?? 'cupcake';
+	const cookieStore = await cookies();
+	const theme = cookieStore.get('theme')?.value ?? 'valentine';
 
 	return (
-		<html lang="en" className="h-full w-full" data-theme="cupcake">
+		<html lang="en" className="h-full w-full">
 			<head>
 				<Icons />
 			</head>
@@ -38,7 +38,7 @@ export default async function RootLayout({
 				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full pb-12 text-lg antialiased`}
 			>
 				<Back />
-				{/* <ThemeController defaultTheme={theme} /> */}
+				<ThemeController defaultTheme={theme} />
 				{children}
 			</body>
 		</html>
