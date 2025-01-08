@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 import daisyui, { type Config as DaisyConfig } from 'daisyui';
-import { themes } from './src/lib/themes';
+import { Themes, themes } from './src/lib/themes';
 import typography from '@tailwindcss/typography';
 
 export default {
@@ -24,6 +24,7 @@ export default {
 	plugins: [typography, daisyui],
 
 	daisyui: {
-		themes
+		themes,
+		darkTheme: Themes.Dark
 	} satisfies DaisyConfig
 } satisfies Config;
