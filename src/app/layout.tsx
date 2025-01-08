@@ -3,6 +3,7 @@ import { Roboto, Roboto_Mono } from 'next/font/google';
 import { Back } from './_components/Back';
 import { Icons } from '$/lib/icons/icons';
 import './globals.scss';
+import { ThemeController } from './_components/ThemeController';
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -33,6 +34,7 @@ export default function RootLayout({
 				className={`${roboto.className} ${robotoMono.className} box-border min-h-full w-full pb-12 text-lg antialiased`}
 			>
 				<Back />
+				<ThemeController defaultTheme="retro" />
 				{children}
 			</body>
 		</html>
