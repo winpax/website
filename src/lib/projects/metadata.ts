@@ -20,11 +20,11 @@ export function justifyRepoLink(repo: string) {
 			() => repo
 		)
 		.when(
-			(repo) => /^[a-zA-Z0-9\-_\.]+\/[a-zA-Z0-9\-_\.]+$/.test(repo),
+			(repo) => /^[a-zA-Z0-9\-_.]+\/[a-zA-Z0-9\-_.]+$/.test(repo),
 			() => `https://github.com/${repo}`
 		)
 		.when(
-			(repo) => /^[a-zA-Z0-9\-_\.]+$/.test(repo),
+			(repo) => /^[a-zA-Z0-9\-_.]+$/.test(repo),
 			() => `https://github.com/jewlexx/${repo}`
 		)
 		.otherwise(() => null);

@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import Image, { type ImageProps, type StaticImageData } from 'next/image';
 import Link from 'next/link';
 import Header from './Project/Header';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 
 export interface Props {
 	title: string;
@@ -30,9 +30,11 @@ function HeroImage({ link }: Props) {
 	);
 
 	if (typeof commonProps.src === 'string') {
+		// eslint-disable-next-line jsx-a11y/alt-text
 		return <Image {...commonProps} width={1200} height={630} />;
 	}
 
+	// eslint-disable-next-line jsx-a11y/alt-text
 	return <Image {...commonProps} placeholder="blur" />;
 }
 
