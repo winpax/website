@@ -1,6 +1,10 @@
-import { useMemo } from 'react';
+'use client';
+
+import { useMemo, useState } from 'react';
 import Image, { type ImageProps, type StaticImageData } from 'next/image';
 import Link from 'next/link';
+import Header from './Project/Header';
+import { AnimatePresence, motion } from 'motion/react';
 
 export interface Props {
 	title: string;
@@ -13,15 +17,6 @@ interface Link {
 	label: string;
 	href: string;
 	image: StaticImageData | string;
-}
-
-function Header({ title, description }: Props) {
-	return (
-		<div className="card-body">
-			<h1 className="card-title">{title}</h1>
-			<p>{description}</p>
-		</div>
-	);
 }
 
 function HeroImage({ link }: Props) {
@@ -42,16 +37,23 @@ function HeroImage({ link }: Props) {
 }
 
 export default function Project(props: Props) {
+	const [hovered, setHovered] = useState(false);
+
 	const { link } = props;
 
 	return (
-		<Link
+		<motion.a
+			layout
+			transition={{ type: 'spring', stiffness: 700, damping: 30 }}
 			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl transition-transform hover:scale-[1.02]"
 			href={link.href}
 			aria-label={link.label}
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
 		>
 			<HeroImage {...props} />
-			<Header {...props} />
-		</Link>
+
+			<Header {...props} hovered={hovered} />
+		</motion.a>
 	);
 }
