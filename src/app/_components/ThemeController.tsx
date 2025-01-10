@@ -32,6 +32,7 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 				value={darkTheme}
 				onChange={updateTheme}
 				checked={theme === darkTheme}
+				aria-label={`Enable ${theme === 'dark' ? 'light' : 'dark'} theme`}
 			/>
 
 			{/* sun icon */}
