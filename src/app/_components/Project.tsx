@@ -29,7 +29,7 @@ function HeroImage({ link }: Props) {
 		() => ({
 			src: link.image,
 			alt: link.label,
-			className: 'max-w-[50vw]'
+			className: 'max-w-[50vw] bg-stone-100 rounded-box'
 		}),
 		[link]
 	);
@@ -46,7 +46,7 @@ export default function Project(props: Props) {
 
 	return (
 		<Link
-			className="card bg-base-100 m-5 min-w-[50vw] max-w-[50vw] shadow-xl transition-transform hover:scale-[1.02]"
+			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl transition-transform hover:scale-[1.02]"
 			href={link.href}
 			aria-label={link.label}
 		>
