@@ -38,6 +38,22 @@ export function justifyDownloadLink(download: Download): Download {
 	};
 }
 
+export function githubRelease(repo: string | undefined): string | undefined {
+	if (!repo) {
+		return undefined;
+	}
+
+	const repoUrl = justifyRepoLink(repo);
+
+	if (!repoUrl) {
+		return undefined;
+	}
+
+	if (repoUrl.startsWith('https://github.com/')) {
+		return `${repoUrl}/releases/latest`;
+	}
+}
+
 export interface ProjectImport extends Metadata {
 	default: MDXContent;
 }

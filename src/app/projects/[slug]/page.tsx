@@ -1,9 +1,9 @@
-import { justifyRepoLink, type ProjectImport } from '$/lib/projects/metadata';
+import { githubRelease, justifyRepoLink, type ProjectImport } from '$/lib/projects/metadata';
 import Image from 'next/image';
-import { FaBook, FaGitAlt, FaHome } from 'react-icons/fa';
+import { FaDownload, FaBook, FaGitAlt, FaHouse } from 'react-icons/fa6';
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-	const slug = (await params).slug;
+	const { slug } = await params;
 	const {
 		default: Post,
 		title,
@@ -18,13 +18,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 	}: ProjectImport = await import(`$/lib/projects/${slug}.mdx`);
 
 	const links = [
-		{ link: homepage, icon: <FaHome />, title: 'Visit the project website' },
+		{ link: homepage, icon: <FaHouse />, title: 'Visit the project website' },
 		{
 			link: repo ? (justifyRepoLink(repo) ?? undefined) : undefined,
 			icon: <FaGitAlt />,
 			title: 'View the project on GitHub'
 		},
-		{ link: hasDocs ? `docs` : undefined, icon: <FaBook />, title: 'View the docs' }
+		{ link: hasDocs ? `./${slug}/docs` : undefined, icon: <FaBook />, title: 'View the docs' },
+		{ link: githubRelease(repo), icon: <FaDownload />, title: 'Download the latest release' }
 	].filter(({ link }) => link);
 
 	return (
