@@ -2,6 +2,12 @@ import { githubRelease, justifyRepoLink, type ProjectImport } from '$/lib/projec
 import Image from 'next/image';
 import { FaDownload, FaBook, FaGitAlt, FaHouse } from 'react-icons/fa6';
 
+interface Link {
+	link: string;
+	icon: React.ReactNode;
+	title: string;
+}
+
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params;
 	const {
@@ -18,15 +24,27 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 	}: ProjectImport = await import(`$/lib/projects/${slug}.mdx`);
 
 	const links = [
-		{ link: homepage, icon: <FaHouse />, title: 'Visit the project website' },
+		{
+			link: homepage,
+			icon: <FaHouse />,
+			title: 'Visit the project website'
+		},
 		{
 			link: repo ? (justifyRepoLink(repo) ?? undefined) : undefined,
 			icon: <FaGitAlt />,
 			title: 'View the project on GitHub'
 		},
-		{ link: hasDocs ? `./${slug}/docs` : undefined, icon: <FaBook />, title: 'View the docs' },
-		{ link: githubRelease(repo), icon: <FaDownload />, title: 'Download the latest release' }
-	].filter(({ link }) => link);
+		{
+			link: hasDocs ? `./${slug}/docs` : undefined,
+			icon: <FaBook />,
+			title: 'View the documentation'
+		},
+		{
+			link: githubRelease(repo),
+			icon: <FaDownload />,
+			title: 'Download the latest release'
+		}
+	].filter((value) => value.link !== undefined) as Link[];
 
 	return (
 		<div className="column prose min-w-full prose-headings:mt-8 prose-headings:font-semibold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg dark:prose-headings:text-white">
@@ -59,6 +77,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 						target="_blank"
 						rel="noopener noreferrer"
 						className="btn btn-link join-item text-3xl"
+						aria-label={title}
 						title={title}
 					>
 						{icon}

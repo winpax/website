@@ -52,6 +52,8 @@ export function githubRelease(repo: string | undefined): string | undefined {
 	if (repoUrl.startsWith('https://github.com/')) {
 		return `${repoUrl}/releases/latest`;
 	}
+
+	return undefined;
 }
 
 export interface ProjectImport extends Metadata {
