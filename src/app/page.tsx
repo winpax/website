@@ -3,6 +3,9 @@ import { projects } from '$/lib/projects';
 import { description, title } from '$/lib/winpax';
 import Project from './_components/Project';
 
+// Page never changes
+export const dynamic = 'force-static';
+
 export default function Home() {
 	return (
 		<main className="column">
