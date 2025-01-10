@@ -30,7 +30,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
 	return (
 		<div className="column prose min-w-full prose-headings:mt-8 prose-headings:font-semibold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg dark:prose-headings:text-white">
-			{hideHero ? null : <Image src={heroImage} alt={title} width={500} height={200} priority />}
+			{hideHero ? null : (
+				<Image
+					className="hero-image"
+					src={heroImage}
+					alt={title}
+					width={500}
+					height={200}
+					priority
+				/>
+			)}
 			<h1>{title}</h1>
 			<p>{description}</p>
 			<small>Published {new Date(pubDate).toLocaleDateString()}</small>
