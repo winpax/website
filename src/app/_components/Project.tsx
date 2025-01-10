@@ -43,9 +43,9 @@ export default function Project(props: Props) {
 
 	return (
 		<motion.a
-			layout
 			transition={{ type: 'spring', stiffness: 700, damping: 30 }}
-			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl transition-transform hover:scale-[1.02]"
+			layout
+			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl"
 			href={link.href}
 			aria-label={link.label}
 			onMouseEnter={() => setHovered(true)}

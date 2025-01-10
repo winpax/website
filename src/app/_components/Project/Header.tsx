@@ -10,15 +10,18 @@ export interface Props extends ProjectProps {
 
 export default function Header({ title, description, hovered }: Props) {
 	return (
-		<div className="card-body">
-			<h1 className="card-title">{title}</h1>
-			<AnimatePresence>
-				{hovered ? (
-					<motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-						{description}
-					</motion.p>
-				) : undefined}
-			</AnimatePresence>
-		</div>
+		<AnimatePresence>
+			{hovered ? (
+				<motion.div
+					className="card-body"
+					initial={{ opacity: 0, scale: 0.95 }}
+					animate={{ opacity: 1, scale: 1 }}
+					exit={{ opacity: 0, scale: 0.9 }}
+				>
+					<h1 className="card-title">{title}</h1>
+					<p>{description}</p>
+				</motion.div>
+			) : null}
+		</AnimatePresence>
 	);
 }
