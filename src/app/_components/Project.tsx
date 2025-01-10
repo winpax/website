@@ -1,10 +1,11 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import Image, { type ImageProps, type StaticImageData } from 'next/image';
+import { useState } from 'react';
+import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
-import Header from './Project/Header';
 import { motion } from 'motion/react';
+import { springTransition } from '$/lib/transitions';
+import Header from './Project/Header';
 
 export interface Props {
 	title: string;
@@ -20,22 +21,14 @@ interface Link {
 }
 
 function HeroImage({ link }: Props) {
-	const commonProps: ImageProps = useMemo(
-		() => ({
-			src: link.image,
-			alt: link.label,
-			className: 'max-w-[50vw] bg-stone-100 rounded-box'
-		}),
-		[link]
+	return (
+		<Image
+			src={link.image}
+			alt={link.label}
+			className="max-w-[50vw] rounded-box bg-stone-100"
+			{...(typeof link.image === 'string' ? { width: 1200, height: 630 } : { placeholder: 'blur' })}
+		/>
 	);
-
-	if (typeof commonProps.src === 'string') {
-		// eslint-disable-next-line jsx-a11y/alt-text
-		return <Image {...commonProps} width={1200} height={630} />;
-	}
-
-	// eslint-disable-next-line jsx-a11y/alt-text
-	return <Image {...commonProps} placeholder="blur" />;
 }
 
 export default function Project(props: Props) {
@@ -45,7 +38,7 @@ export default function Project(props: Props) {
 
 	return (
 		<motion.a
-			transition={{ type: 'spring', stiffness: 700, damping: 30 }}
+			transition={springTransition}
 			layout
 			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl"
 			href={link.href}
