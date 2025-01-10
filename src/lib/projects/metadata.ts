@@ -9,6 +9,53 @@ import { StaticImageData } from 'next/image';
 
 const projectsDirectory = join(process.cwd(), 'src/content/projects');
 
+export function justifyRepoLink(repo: string) {
+	return match(repo)
+		.when(
+			(repo) => repo.startsWith('http://'),
+			() => repo.replace('http://', 'https://')
+		)
+		.when(
+			(repo) => repo.startsWith('https://'),
+			() => repo
+		)
+		.when(
+			(repo) => /^[a-zA-Z0-9\-_.]+\/[a-zA-Z0-9\-_.]+$/.test(repo),
+			() => `https://github.com/${repo}`
+		)
+		.when(
+			(repo) => /^[a-zA-Z0-9\-_.]+$/.test(repo),
+			() => `https://github.com/jewlexx/${repo}`
+		)
+		.otherwise(() => null);
+}
+
+export function justifyDownloadLink(download: Download): Download {
+	return {
+		...download,
+		arch: download.arch?.map((arch) => parseArch(arch)).filter((arch) => arch !== null),
+		os: download.os?.map((os) => parseOs(os)).filter((os) => os !== null)
+	};
+}
+
+export function githubRelease(repo: string | undefined): string | undefined {
+	if (!repo) {
+		return undefined;
+	}
+
+	const repoUrl = justifyRepoLink(repo);
+
+	if (!repoUrl) {
+		return undefined;
+	}
+
+	if (repoUrl.startsWith('https://github.com/')) {
+		return `${repoUrl}/releases/latest`;
+	}
+
+	return undefined;
+}
+
 export interface ProjectImport extends Metadata {
 	default: MDXContent;
 }
@@ -26,6 +73,7 @@ export interface Metadata {
 	shields?: Shield[];
 	toy?: boolean;
 	hideHero?: boolean;
+	hasDocs?: boolean;
 	download?: Download;
 }
 
@@ -74,47 +122,17 @@ function getProjectBySlugInner(slug: string): ProjectInfo | null {
 	const { data, content } = matter(fileContents);
 
 	if (data.repo) {
-		const repo: string = data.repo;
+		const repo = justifyRepoLink(data.repo);
 
-		const repoUrl = match(repo)
-			.when(
-				(repo) => repo.startsWith('http://'),
-				() => repo.replace('http://', 'https://')
-			)
-			.when(
-				(repo) => repo.startsWith('https://'),
-				() => repo
-			)
-			.when(
-				(repo) => /^[a-zA-Z0-9\-_\.]+\/[a-zA-Z0-9\-_\.]+$/.test(repo),
-				() => `https://github.com/${repo}`
-			)
-			.when(
-				(repo) => /^[a-zA-Z0-9\-_\.]+$/.test(repo),
-				() => `https://github.com/jewlexx/${repo}`
-			)
-			.otherwise(() => null);
-
-		if (repoUrl) {
-			data.repo = repoUrl;
-		} else {
+		if (!repo) {
 			throw new Error(`Invalid repo url for ${slug}`);
 		}
 
-		data.repo = repoUrl;
+		data.repo = repo;
 	}
 
 	if (data.download) {
-		const download = data.download;
-
-		if (download.arch) {
-			download.arch = download.arch.map((arch: string) => parseArch(arch));
-		}
-		if (download.os) {
-			download.os = download.os.map((os: string) => parseOs(os));
-		}
-
-		data.download = download;
+		data.download = justifyDownloadLink(data.download);
 	}
 
 	return {

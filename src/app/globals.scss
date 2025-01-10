@@ -30,4 +30,8 @@
 	.column {
 		@apply flex flex-col items-center justify-center;
 	}
+
+	.hero-image {
+		@apply mb-1 mt-16 rounded-box bg-stone-100;
+	}
 }

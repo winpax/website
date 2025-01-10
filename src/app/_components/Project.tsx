@@ -1,6 +1,11 @@
-import { useMemo } from 'react';
-import Image, { type ImageProps, type StaticImageData } from 'next/image';
+'use client';
+
+import { useState } from 'react';
+import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
+import { motion } from 'motion/react';
+import { springTransition } from '$/lib/transitions';
+import Header from './Project/Header';
 
 export interface Props {
 	title: string;
@@ -15,43 +20,38 @@ interface Link {
 	image: StaticImageData | string;
 }
 
-function Header({ title, description }: Props) {
-	return (
-		<div className="card-body">
-			<h1 className="card-title">{title}</h1>
-			<p>{description}</p>
-		</div>
-	);
-}
-
 function HeroImage({ link }: Props) {
-	const commonProps: ImageProps = useMemo(
-		() => ({
-			src: link.image,
-			alt: link.label,
-			className: 'max-w-[50vw]'
-		}),
-		[link]
+	return (
+		<Image
+			src={link.image}
+			alt={link.label}
+			className="max-w-[50vw] rounded-box bg-stone-100"
+			{...(typeof link.image === 'string' ? { width: 1200, height: 630 } : { placeholder: 'blur' })}
+		/>
 	);
-
-	if (typeof commonProps.src === 'string') {
-		return <Image {...commonProps} width={1200} height={630} />;
-	}
-
-	return <Image {...commonProps} placeholder="blur" />;
 }
 
 export default function Project(props: Props) {
+	const [hovered, setHovered] = useState(false);
+
 	const { link } = props;
 
 	return (
-		<Link
-			className="card bg-base-100 m-5 min-w-[50vw] max-w-[50vw] shadow-xl transition-transform hover:scale-[1.02]"
+		<motion.a
+			transition={springTransition}
+			layout
+			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl"
 			href={link.href}
 			aria-label={link.label}
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+			onFocus={() => setHovered(true)}
+			onBlur={() => setHovered(false)}
+			tabIndex={0}
 		>
 			<HeroImage {...props} />
-			<Header {...props} />
-		</Link>
+
+			<Header {...props} hovered={hovered} />
+		</motion.a>
 	);
 }
