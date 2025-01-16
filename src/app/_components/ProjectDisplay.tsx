@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { FaBook, FaDownload, FaGitAlt, FaHouse } from 'react-icons/fa6';
 import { githubRelease, justifyRepoLink, type ProjectImport } from '$/lib/projects/metadata';
@@ -12,42 +13,43 @@ export interface Props extends ProjectImport {
 	slug: string;
 }
 
-export default function ProjectDisplay({ slug, ...project }: Props) {
-	const {
-		default: Post,
-		title,
-		description,
-		heroImage,
-		pubDate,
-		shields,
-		hideHero,
-		homepage,
-		repo,
-		hasDocs
-	}: ProjectImport = project;
-
-	const links = [
-		{
-			link: homepage,
-			icon: <FaHouse />,
-			title: 'Visit the project website'
-		},
-		{
-			link: repo ? (justifyRepoLink(repo) ?? undefined) : undefined,
-			icon: <FaGitAlt />,
-			title: 'View the project on GitHub'
-		},
-		{
-			link: hasDocs ? `./${slug}/docs` : undefined,
-			icon: <FaBook />,
-			title: 'View the documentation'
-		},
-		{
-			link: githubRelease(repo),
-			icon: <FaDownload />,
-			title: 'Download the latest release'
-		}
-	].filter((value) => value.link !== undefined) as Link[];
+export default function ProjectDisplay({
+	slug,
+	default: Post,
+	title,
+	description,
+	heroImage,
+	pubDate,
+	shields,
+	hideHero,
+	homepage,
+	repo,
+	hasDocs
+}: Props) {
+	const links = useMemo(() => {
+		return [
+			{
+				link: homepage,
+				icon: <FaHouse />,
+				title: 'Visit the project website'
+			},
+			{
+				link: repo ? (justifyRepoLink(repo) ?? undefined) : undefined,
+				icon: <FaGitAlt />,
+				title: 'View the project on GitHub'
+			},
+			{
+				link: hasDocs ? `./${slug}/docs` : undefined,
+				icon: <FaBook />,
+				title: 'View the documentation'
+			},
+			{
+				link: githubRelease(repo),
+				icon: <FaDownload />,
+				title: 'Download the latest release'
+			}
+		].filter((value) => value.link !== undefined) as Link[];
+	}, [hasDocs, homepage, repo, slug]);
 
 	return (
 		<div className="column prose min-w-full prose-headings:mt-8 prose-headings:font-semibold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg dark:prose-headings:text-white">
