@@ -1,6 +1,6 @@
-import { githubRelease, justifyRepoLink, type ProjectImport } from '$/lib/projects/metadata';
 import Image from 'next/image';
 import { FaDownload, FaBook, FaGitAlt, FaHouse } from 'react-icons/fa6';
+import { githubRelease, justifyRepoLink, type ProjectImport } from '$/lib/projects/metadata';
 
 interface Link {
 	link: string;

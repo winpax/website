@@ -1,13 +1,7 @@
-import fs from 'fs';
-import { join } from 'path';
-
-import { type MDXContent } from 'mdx/types';
+import type { MDXContent } from 'mdx/types';
+import type { StaticImageData } from 'next/image';
 import { match } from 'ts-pattern';
-import matter from 'gray-matter';
 import { Arch, Os, parseArch, parseOs } from './arch';
-import { StaticImageData } from 'next/image';
-
-const projectsDirectory = join(process.cwd(), 'src/content/projects');
 
 export function justifyRepoLink(repo: string) {
 	return match(repo)
@@ -93,62 +87,6 @@ export interface Shield {
 export interface ProjectInfo extends Metadata {
 	slug: string;
 	content: string;
-}
-
-export function getProjectSlugs() {
-	return fs
-		.readdirSync(projectsDirectory)
-		.filter((file) => file.endsWith('.md'))
-		.map((file) => file.replace('.md', ''));
-}
-
-export function getProjectBySlug(slug: string): ProjectInfo | null {
-	try {
-		return getProjectBySlugInner(slug);
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	} catch (_e) {
-		return null;
-	}
-}
-
-function getProjectBySlugInner(slug: string): ProjectInfo | null {
-	const fullPath = join(projectsDirectory, `${slug}.md`);
-
-	if (!fs.existsSync(fullPath)) {
-		return null;
-	}
-
-	const fileContents = fs.readFileSync(fullPath, 'utf8');
-	const { data, content } = matter(fileContents);
-
-	if (data.repo) {
-		const repo = justifyRepoLink(data.repo);
-
-		if (!repo) {
-			throw new Error(`Invalid repo url for ${slug}`);
-		}
-
-		data.repo = repo;
-	}
-
-	if (data.download) {
-		data.download = justifyDownloadLink(data.download);
-	}
-
-	return {
-		...(data as Metadata),
-		slug,
-		content
-	};
-}
-
-export function getAllProjects() {
-	const slugs = getProjectSlugs();
-
-	return slugs
-		.map((slug) => getProjectBySlug(slug))
-		.filter((project) => project !== null)
-		.sort(sortProject);
 }
 
 export function sortProject(a: ProjectInfo, b: ProjectInfo) {
