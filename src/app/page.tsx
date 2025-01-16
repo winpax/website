@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { projects } from '$/lib/projects';
 import { description, title } from '$/lib/winpax';
 import Project from './_components/Project';
-// import ProjectModal from './_components/ProjectModal';
+import ProjectModal from './_components/ProjectModal';
 
 // Page never changes
 export const dynamic = 'force-static';
@@ -19,7 +19,7 @@ export default function Home() {
 			{projects.map((project, index) => (
 				<Project {...project} alternate={index % 2 === 1} key={project.title} />
 			))}
-			{/* <ProjectModal project="sprinkles" /> */}
+			<ProjectModal project="sprinkles" />
 		</main>
 	);
 }
