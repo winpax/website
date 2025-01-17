@@ -1,30 +1,47 @@
 'use client';
 
-import { Suspense, useMemo } from 'react';
-import ProjectDisplay from './ProjectDisplay';
-import wrapPromise, { useDataFetch } from '$/lib/wrapPromise';
-import { ProjectImport } from '$/lib/projects/metadata';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 
-function ProjectData({ project }: { project: string }) {
-	// const projectSuspense = useMemo(() => {
-	// 	return wrapPromise<ProjectImport>(import(`$/lib/projects/${project}.mdx`));
-	// }, []);
+export default function ProjectModal({
+	children,
+	initialModal = false
+}: {
+	children: React.ReactNode;
+	initialModal?: boolean;
+}) {
+	const [modal, setModal] = useState(initialModal);
+	const modalEl = useRef<HTMLDialogElement>(null);
+	const router = useRouter();
 
-	const projectData = useDataFetch(() => import(`$/lib/projects/${project}.mdx`));
+	useEffect(() => {
+		if (modal) {
+			modalEl.current?.showModal();
+		} else {
+			modalEl.current?.close();
+		}
+	}, [modal]);
 
-	console.log(projectData);
+	if (!router.pathname.startsWith('/projects')) {
+		return null;
+	}
 
-	// const projectData = projectSuspense.read();
-
-	return <ProjectDisplay {...projectData} slug={project} />;
-}
-
-export default function ProjectModal({ project }: { project: string }) {
-	return (
-		<dialog open className="card fixed m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl">
-			<Suspense fallback={<div>Loading...</div>}>
-				<ProjectData project={project} />
-			</Suspense>
-		</dialog>
-	);
+	if (modal) {
+		return (
+			<div className="fixed z-10 flex min-h-[100vh] min-w-[100vw] items-center justify-center">
+				<dialog
+					ref={modalEl}
+					onClick={() => {
+						setModal(false);
+						router.back();
+					}}
+					className="card mx-auto my-auto max-h-[75vh] min-h-[75vh] min-w-[75vw] max-w-[75vw] self-center overflow-scroll bg-base-100 bg-blend-darken shadow-xl backdrop:bg-black backdrop:bg-opacity-25"
+				>
+					<div onClick={(e) => e.stopPropagation()}>{children}</div>
+				</dialog>
+			</div>
+		);
+	} else {
+		return children;
+	}
 }

@@ -5,6 +5,7 @@ import { Icons } from '$/lib/icons/icons';
 import './globals.scss';
 import { ThemeController } from './_components/ThemeController';
 import { cookies } from 'next/headers';
+import ProjectModal from './_components/ProjectModal';
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -41,7 +42,7 @@ export default async function RootLayout({
 			>
 				<Back />
 				<ThemeController defaultTheme={theme} />
-				{projects}
+				<ProjectModal initialModal>{projects}</ProjectModal>
 				{children}
 			</body>
 		</html>

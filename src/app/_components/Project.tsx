@@ -31,13 +31,15 @@ function HeroImage({ link }: Props) {
 	);
 }
 
+const MotionLink = motion.create(Link);
+
 export default function Project(props: Props) {
 	const [hovered, setHovered] = useState(false);
 
 	const { link } = props;
 
 	return (
-		<motion.a
+		<MotionLink
 			transition={springTransition}
 			layout
 			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl"
@@ -52,6 +54,6 @@ export default function Project(props: Props) {
 			<HeroImage {...props} />
 
 			<Header {...props} hovered={hovered} />
-		</motion.a>
+		</MotionLink>
 	);
 }
