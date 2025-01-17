@@ -25,3 +25,24 @@ export default function wrapPromise<T>(promise: Promise<T>) {
 
 	return { read };
 }
+
+import { useState, useEffect } from 'react';
+
+export function useDataFetch<T>(promise: Promise<T>) {
+	const [data, setData] = useState<T | null>(null);
+
+	useEffect(() => {
+		promise
+			.then((data) => setData(data))
+			.catch(() => {
+				console.log('woopsie an error');
+				//take care of the error here
+			});
+	}, [promise]);
+
+	if (data) {
+		return data;
+	} else {
+		throw promise;
+	}
+}
