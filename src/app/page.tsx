@@ -19,7 +19,7 @@ export default function Home() {
 			{projects.map((project, index) => (
 				<Project {...project} alternate={index % 2 === 1} key={project.title} />
 			))}
-			<ProjectModal project="sprinkles" />
+			{/* <ProjectModal project="sprinkles" /> */}
 		</main>
 	);
 }

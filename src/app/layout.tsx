@@ -22,8 +22,10 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
+	projects,
 	children
 }: Readonly<{
+	projects: React.ReactNode;
 	children: React.ReactNode;
 }>) {
 	const cookieStore = await cookies();
@@ -39,6 +41,7 @@ export default async function RootLayout({
 			>
 				<Back />
 				<ThemeController defaultTheme={theme} />
+				{projects}
 				{children}
 			</body>
 		</html>

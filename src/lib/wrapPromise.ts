@@ -26,23 +26,22 @@ export default function wrapPromise<T>(promise: Promise<T>) {
 	return { read };
 }
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-export function useDataFetch<T>(promise: Promise<T>) {
+export function useDataFetch<T>(promise: Promise<T> | (() => Promise<T>)) {
 	const [data, setData] = useState<T | null>(null);
+	const realPromise = useMemo(() => (promise instanceof Promise ? promise : promise()), [promise]);
 
 	useEffect(() => {
-		promise
-			.then((data) => setData(data))
-			.catch(() => {
-				console.log('woopsie an error');
-				//take care of the error here
-			});
-	}, [promise]);
+		realPromise.then(setData).catch(() => {
+			console.log('woopsie an error');
+			//take care of the error here
+		});
+	}, [realPromise]);
 
 	if (data) {
 		return data;
 	} else {
-		throw promise;
+		throw realPromise;
 	}
 }

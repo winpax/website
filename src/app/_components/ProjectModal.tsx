@@ -10,7 +10,9 @@ function ProjectData({ project }: { project: string }) {
 	// 	return wrapPromise<ProjectImport>(import(`$/lib/projects/${project}.mdx`));
 	// }, []);
 
-	const projectData = useDataFetch(import(`$/lib/projects/${project}.mdx`));
+	const projectData = useDataFetch(() => import(`$/lib/projects/${project}.mdx`));
+
+	console.log(projectData);
 
 	// const projectData = projectSuspense.read();
 
