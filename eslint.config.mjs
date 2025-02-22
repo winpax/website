@@ -7,6 +7,7 @@ import ts from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 import { FlatCompat } from '@eslint/eslintrc';
+import reactCompiler from 'eslint-plugin-react-compiler';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,5 +31,6 @@ export default ts.config(
 			}
 		}
 	},
-	...config
+	...config,
+	reactCompiler.configs.recommended
 );

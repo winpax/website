@@ -25,6 +25,9 @@ const nextConfig: NextConfig = {
 				permanent: true
 			}
 		];
+	},
+	experimental: {
+		reactCompiler: true,
 	}
 };
 
