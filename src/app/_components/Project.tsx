@@ -25,8 +25,10 @@ function HeroImage({ link }: Props) {
 		<Image
 			src={link.image}
 			alt={link.label}
+			width={1200}
+			height={630}
 			className="max-w-[50vw] rounded-box bg-stone-100"
-			{...(typeof link.image === 'string' ? { width: 1200, height: 630 } : { placeholder: 'blur' })}
+			{...(typeof link.image === 'string' ? {} : { placeholder: 'blur' })}
 		/>
 	);
 }
