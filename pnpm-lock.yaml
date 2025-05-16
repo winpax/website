@@ -132,9 +132,6 @@ importers:
       progress:
         specifier: ^2.0.3
         version: 2.0.3
-      sass:
-        specifier: ^1.83.0
-        version: 1.88.0
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -4019,6 +4016,7 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+    optional: true
 
   client-only@0.0.1: {}
 
@@ -4776,7 +4774,8 @@ snapshots:
 
   ignore@7.0.4: {}
 
-  immutable@5.1.2: {}
+  immutable@5.1.2:
+    optional: true
 
   import-fresh@3.3.1:
     dependencies:
@@ -5757,7 +5756,8 @@ snapshots:
     dependencies:
       picomatch: 2.3.1
 
-  readdirp@4.1.2: {}
+  readdirp@4.1.2:
+    optional: true
 
   recma-build-jsx@1.0.0:
     dependencies:
@@ -5924,6 +5924,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   sax@1.4.1: {}
 
