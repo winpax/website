@@ -4,3 +4,5 @@ export const lightTheme = 'valentine';
 export const darkTheme = 'forest';
 
 export const themes: Config['themes'] = [lightTheme, darkTheme];
+
+export const themeString = `${lightTheme},${darkTheme}`;

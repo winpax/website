@@ -1,8 +1,8 @@
 'use client';
 
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { darkTheme, lightTheme } from '$/lib/themes';
-import { setTheme as setThemeAction } from '$/app/actions';
+import { darkTheme, lightTheme, themeString } from '$/lib/themes';
+import cookies from 'js-cookie';
 
 export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 	const [theme, setTheme] = useState(defaultTheme);
@@ -12,7 +12,10 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 			const newTheme = event.target.checked ? darkTheme : lightTheme;
 
 			setTheme(newTheme);
-			setThemeAction(newTheme);
+			cookies.set('theme', newTheme, {
+				path: '/',
+				expires: new Date().getTime() + 60 * 60 * 24 * 365
+			});
 		},
 		[setTheme]
 	);
@@ -25,14 +28,14 @@ export function ThemeController({ defaultTheme }: { defaultTheme: string }) {
 		<label className="swap swap-rotate absolute right-5 top-5">
 			{/* this hidden checkbox controls the state */}
 			<input
-				data-toggle-theme="dark,light"
+				data-toggle-theme={themeString}
 				data-act-class="ACTIVECLASS"
 				type="checkbox"
 				className="theme-controller"
 				value={darkTheme}
 				onChange={updateTheme}
 				checked={theme === darkTheme}
-				aria-label={`Enable ${theme === 'dark' ? 'light' : 'dark'} theme`}
+				aria-label={`Enable ${theme === darkTheme ? lightTheme : darkTheme} theme`}
 			/>
 
 			{/* sun icon */}

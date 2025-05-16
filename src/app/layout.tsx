@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Roboto, Roboto_Mono } from 'next/font/google';
+import { cookies } from 'next/headers';
 import { Back } from './_components/Back';
 import { Icons } from '$/lib/icons/icons';
-import './globals.scss';
 import { ThemeController } from './_components/ThemeController';
-import { cookies } from 'next/headers';
+import './globals.css';
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -30,7 +30,7 @@ export default async function RootLayout({
 	const theme = cookieStore.get('theme')?.value ?? 'valentine';
 
 	return (
-		<html lang="en" className="h-full w-full">
+		<html lang="en" className="h-full w-full" data-theme={theme}>
 			<head>
 				<Icons />
 			</head>
