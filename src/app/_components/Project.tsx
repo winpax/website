@@ -27,7 +27,6 @@ function HeroImage({ link }: Props) {
 			alt={link.label}
 			width={1200}
 			height={630}
-			quality={1}
 			className="rounded-box max-w-[50vw] bg-stone-100"
 			{...(typeof link.image === 'string' ? {} : { placeholder: 'blur' })}
 		/>
