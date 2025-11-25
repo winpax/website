@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 					</a>
 				))}
 			</div>
-			<main className="mx-10 max-w-screen-sm">
+			<main className="mx-10 max-w-(--breakpoint-sm)">
 				<Post />
 			</main>
 		</div>

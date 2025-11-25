@@ -29,7 +29,7 @@ function HeroImage({ link }: Props) {
 			height={630}
 			quality={1}
 			className="max-w-[50vw] rounded-box bg-stone-100"
-			{...(typeof link.image === 'string' ? {} : { placeholder: 'blur' })}
+			{...(typeof link.image === 'string' ? {} : { placeholder: 'blur-sm' })}
 		/>
 	);
 }
