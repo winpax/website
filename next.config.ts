@@ -26,9 +26,7 @@ const nextConfig: NextConfig = {
 			}
 		];
 	},
-	experimental: {
-		reactCompiler: true,
-	}
+	reactCompiler: true
 };
 
 const withMdx = createMdx({
