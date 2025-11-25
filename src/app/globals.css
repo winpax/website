@@ -3,7 +3,7 @@
 @plugin '@tailwindcss/typography';
 @plugin "daisyui" {
 	themes:
-		valetine --default,
+		valetine,
 		forest --prefers-dark;
 }
 
@@ -34,8 +34,6 @@
 }
 
 @theme {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
 }
 
 @layer utilities {
