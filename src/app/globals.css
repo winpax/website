@@ -1,28 +1,10 @@
 @import 'tailwindcss';
 
 @plugin '@tailwindcss/typography';
-@plugin "daisyui" {
+@plugin 'daisyui' {
 	themes:
-		valetine,
+		caramellatte --default,
 		forest --prefers-dark;
-}
-
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-		border-color: var(--color-gray-200, currentcolor);
-	}
 }
 
 @utility column {
@@ -33,31 +15,9 @@
 	@apply rounded-box mt-16 mb-1 bg-stone-100;
 }
 
-@theme {
-}
-
 @layer utilities {
-	*,
-	*::before,
-	*::after {
-		margin: 0;
-		padding: 0;
-		box-sizing: inherit;
-	}
-
 	:root {
 		--background: #f3f3f3;
 		--foreground: #0f0f0f;
 	}
-
-	/* :root {
-	--background: #ffffff;
-	--foreground: #171717;
-}
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
-} */
 }
