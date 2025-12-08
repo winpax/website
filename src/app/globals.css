@@ -1,21 +1,59 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-*,
-*::before,
-*::after {
-	margin: 0;
-	padding: 0;
-	box-sizing: inherit;
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --transition-property-button:
+    color, background-color, border-color, text-decoration-color, fill, stroke,
+    transform;
 }
 
-:root {
-	--background: #f3f3f3;
-	--foreground: #0f0f0f;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-/* :root {
+@utility column {
+  @apply flex flex-col items-center justify-center;
+}
+
+@utility hero-image {
+  @apply /* rounded-box */ mt-16 mb-1 bg-stone-100;
+}
+
+@layer utilities {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+
+  :root {
+    --background: #f3f3f3;
+    --foreground: #0f0f0f;
+  }
+
+  /* :root {
 	--background: #ffffff;
 	--foreground: #171717;
 }
@@ -25,13 +63,4 @@
 		--foreground: #ededed;
 	}
 } */
-
-@layer components {
-	.column {
-		@apply flex flex-col items-center justify-center;
-	}
-
-	.hero-image {
-		@apply /* rounded-box */ mt-16 mb-1 bg-stone-100;
-	}
 }
