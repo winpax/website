@@ -32,6 +32,6 @@
 	}
 
 	.hero-image {
-		@apply mb-1 mt-16 rounded-box bg-stone-100;
+		@apply /* rounded-box */ mt-16 mb-1 bg-stone-100;
 	}
 }
