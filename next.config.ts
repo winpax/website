@@ -3,6 +3,7 @@ import createMdx from '@next/mdx';
 
 const nextConfig: NextConfig = {
 	images: {
+		qualities: [75],
 		remotePatterns: [
 			{
 				hostname: 'cordor.dev',
@@ -26,9 +27,7 @@ const nextConfig: NextConfig = {
 			}
 		];
 	},
-	experimental: {
-		reactCompiler: true,
-	}
+	reactCompiler: true
 };
 
 const withMdx = createMdx({
