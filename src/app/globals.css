@@ -1,37 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-*,
-*::before,
-*::after {
-	margin: 0;
-	padding: 0;
-	box-sizing: inherit;
+@plugin '@tailwindcss/typography';
+@plugin 'daisyui' {
+	themes:
+		valentine --default,
+		forest --prefersdark;
 }
 
-:root {
-	--background: #f3f3f3;
-	--foreground: #0f0f0f;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-background: #f3f3f3;
+	--color-foreground: #0f0f0f;
+
+	--transition-property-button:
+		color, background-color, border-color, text-decoration-color, fill, stroke, transform;
 }
 
-/* :root {
-	--background: #ffffff;
-	--foreground: #171717;
+@utility column {
+	@apply flex flex-col items-center justify-center;
 }
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
-} */
 
-@layer components {
-	.column {
-		@apply flex flex-col items-center justify-center;
-	}
-
-	.hero-image {
-		@apply mb-1 mt-16 rounded-box bg-stone-100;
-	}
+@utility hero-image {
+	@apply rounded-box mt-16 mb-1 bg-stone-100;
 }

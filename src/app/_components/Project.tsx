@@ -27,8 +27,8 @@ function HeroImage({ link }: Props) {
 			alt={link.label}
 			width={1200}
 			height={630}
-			quality={1}
-			className="max-w-[50vw] rounded-box bg-stone-100"
+			quality={75}
+			className="rounded-box max-w-[50vw] bg-stone-100"
 			{...(typeof link.image === 'string' ? {} : { placeholder: 'blur' })}
 		/>
 	);
@@ -43,7 +43,7 @@ export default function Project(props: Props) {
 		<motion.a
 			transition={springTransition}
 			layout
-			className="card m-5 min-w-[50vw] max-w-[50vw] bg-base-100 shadow-xl"
+			className="card bg-base-100 m-5 max-w-[50vw] min-w-[50vw] shadow-xl"
 			href={link.href}
 			aria-label={link.label}
 			onMouseEnter={() => setHovered(true)}
