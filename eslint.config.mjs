@@ -5,11 +5,13 @@ import globals from 'globals';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTS from 'eslint-config-next/typescript';
 
 export default defineConfig(
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...nextVitals,
+	...nextTS,
 	globalIgnores([
 		// Default ignores of eslint-config-next:
 		'.next/**',
